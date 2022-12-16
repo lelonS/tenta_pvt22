@@ -1,5 +1,5 @@
 import requests
-
+import api
 # Tips: använd sidan nedan för att se vilken data vi får tillbaks och hur apiet fungerar
 # vi använder oss enbart av /nobelPrizes
 # Dokumentation, hjälp samt verktyg för att testa apiet fins här: https://app.swaggerhub.com/apis/NobelMedia/NobelMasterData/2.1
@@ -23,13 +23,18 @@ def print_help():
 
 
 def handle_user_input(user_input):
-    year, field_swe = user_input.split()
+    input_words = user_input.split()
 
-    parameters = {"nobelPrizeYear": int(
-        year), "nobelPrizeCategory": FIELD_CATEGORIES[field_swe]}
+    if len(input_words) == 2:
+        year = input_words[0]
+        field = input_words[1]
+    elif len(input_words) == 1:
+        year = input_words[0]
+        field = ""
+    else:
+        print("Felaktigt antal ord")
 
-    res = requests.get(
-        "http://api.nobelprize.org/2.1/nobelPrizes", params=parameters).json()
+    res = api.get_nobel_prize(int(year), FIELD_CATEGORIES.get(field, None))
     # TODO 5p  Lägg till någon typ av avskiljare mellan pristagare, exempelvis --------------------------
 
     # TODO 20p Skriv ut hur mycket pengar varje pristagare fick, tänk på att en del priser delas mellan flera mottagare, skriv ut både i dåtidens pengar och dagens värde
@@ -60,7 +65,6 @@ def main():
             break
         elif user_input.lower() == "h":
             print_help()
-
         else:
             handle_user_input(user_input)
 
