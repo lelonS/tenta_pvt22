@@ -2,6 +2,7 @@ import requests
 
 API_URL = "http://api.nobelprize.org/2.1/nobelPrizes"
 
+MIN_YEAR = 1901
 FIELD_CATEGORIES = {"fysik": "phy",
                     "kemi": "che",
                     "litteratur": "lit",
