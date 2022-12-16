@@ -16,7 +16,7 @@ def get_nobel_prize(year: int, field: str | None = None) -> dict:
 
     Args:
         year (int): The year. If below MIN_YEAR then MIN_YEAR is used by the api.
-        field (str | None, optional): The field. If None only year is used. Defaults to None.
+        field (str | None, optional): The field (ex. phy). If None or unknown only year is used. Defaults to None.
 
     Returns:
         dict: Dictionary with data from API
