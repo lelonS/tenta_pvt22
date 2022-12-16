@@ -10,6 +10,18 @@ def print_help():
     print("Exempel: 1965 fysik")
 
 
+def print_search(year: int, field: str):
+    """Searches and prints the result using the API
+
+    Args:
+        year (int): The year
+        field (str): The field (long name)
+    """
+    res = api.get_nobel_prize(year, api.FIELD_CATEGORIES.get(field, None))
+    for award in res["nobelPrizes"]:
+        api.print_award(award)
+
+
 def handle_input_search(user_input: str):
     """Handles user input for searching for a Nobel prize
     and prints the result
@@ -24,7 +36,7 @@ def handle_input_search(user_input: str):
         year = input_words[0]
         field = input_words[1].lower()
         if field not in api.FIELD_CATEGORIES:
-            print("Felaktigt område")
+            print("Området kunde inte hittas")
             return
     elif len(input_words) == 1:
         year = input_words[0]
@@ -41,9 +53,7 @@ def handle_input_search(user_input: str):
         return
 
     # Get data from API and print it
-    res = api.get_nobel_prize(year, api.FIELD_CATEGORIES.get(field, None))
-    for award in res["nobelPrizes"]:
-        api.print_award(award)
+    print_search(year, field)
 
 
 def main():
