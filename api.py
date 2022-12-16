@@ -2,6 +2,13 @@ import requests
 
 API_URL = "http://api.nobelprize.org/2.1/nobelPrizes"
 
+FIELD_CATEGORIES = {"fysik": "phy",
+                    "kemi": "che",
+                    "litteratur": "lit",
+                    "ekonomi": "eco",
+                    "fred": "pea",
+                    "medicin": "med"}
+
 
 def get_nobel_prize(year: int, field: str | None = None) -> dict:
     """Get nobel prize data from API
@@ -70,8 +77,12 @@ def print_award(award: dict):
     prize_adjusted = award["prizeAmountAdjusted"]
     print(f"{award['categoryFullName']['se']} prissumma {prize_amount} SEK")
 
-    for laureate in award["laureates"]:
-        print("-"*80)
-        print_laureate(laureate, prize_amount, prize_adjusted)
+    if "laureates" not in award:
+        # Some awards don't have laureates (1916 chemistry)
+        print("(No laureates)")
+    else:
+        for laureate in award["laureates"]:
+            print("-"*80)
+            print_laureate(laureate, prize_amount, prize_adjusted)
 
     print("="*80)

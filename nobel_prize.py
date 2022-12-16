@@ -1,19 +1,16 @@
 import api
 
-FIELD_CATEGORIES = {"fysik": "phy",
-                    "kemi": "che",
-                    "litteratur": "lit",
-                    "ekonomi": "eco",
-                    "fred": "pea",
-                    "medicin": "med"}
+
 
 
 def print_help():
     """Prints help text on how to use the program
     """
-    print("Ange ett år och fält eller 'q' för att avsluta")
-    print(f"Fält att välja på: {', '.join(FIELD_CATEGORIES.keys())}")
+    print("(Ange 'q' för att avsluta och 'h' för hjälp)")
+    print("Ange ett år och fält")
+    print(f"Fält att välja på: {', '.join(api.FIELD_CATEGORIES.keys())}")
     print("Exempel: 1965 fysik")
+
 
 
 def handle_input_search(user_input: str):
@@ -29,7 +26,7 @@ def handle_input_search(user_input: str):
     if len(input_words) == 2:
         year = input_words[0]
         field = input_words[1].lower()
-        if field not in FIELD_CATEGORIES:
+        if field not in api.FIELD_CATEGORIES:
             print("Felaktigt område")
             return
     elif len(input_words) == 1:
@@ -47,7 +44,7 @@ def handle_input_search(user_input: str):
         return
 
     # Get data from API and print it
-    res = api.get_nobel_prize(year, FIELD_CATEGORIES.get(field, None))
+    res = api.get_nobel_prize(year, api.FIELD_CATEGORIES.get(field, None))
     for award in res["nobelPrizes"]:
         api.print_award(award)
 
