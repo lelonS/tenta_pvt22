@@ -1,6 +1,15 @@
 import api
 
 
+def print_error(message: str):
+    """Prints an error message
+
+    Args:
+        error (str): The error message
+    """
+    print(f"{message} Ange 'h' för hjälp")
+
+
 def print_help():
     """Prints help text on how to use the program
     """
@@ -20,7 +29,7 @@ def print_search(year: int, field: str):
         field (str): The field (long name)
     """
     if year < api.MIN_YEAR:
-        print(f"Minsta året som stödjs är {api.MIN_YEAR}. Ange 'h' för hjälp")
+        print_error(f"Minsta året som stödjs är {api.MIN_YEAR}.")
         return
 
     res = api.get_nobel_prize(year, api.FIELD_CATEGORIES.get(field, None))
@@ -42,20 +51,20 @@ def handle_input_search(user_input: str):
         year = input_words[0]
         field = input_words[1].lower()
         if field not in api.FIELD_CATEGORIES:
-            print(f"Fältet '{field}' kunde inte hittas. Ange 'h' för hjälp")
+            print_error(f"Fältet '{field}' kunde inte hittas.")
             return
     elif len(input_words) == 1:
         year = input_words[0]
         field = ""
     else:
-        print("Felaktigt antal ord. Ange 'h' för hjälp")
+        print_error("Felaktigt antal ord.")
         return
 
     # Check if year is an int
     try:
         year = int(year)
     except ValueError:
-        print("Felaktigt år (måste vara ett heltal). Ange 'h' för hjälp")
+        print_error("Felaktigt år (måste vara ett heltal).")
         return
 
     # Get data from API and print it
