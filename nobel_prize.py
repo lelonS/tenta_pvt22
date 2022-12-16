@@ -13,9 +13,6 @@ FIELD_CATEGORIES = {"fysik": "phy",
                     "medicin": "med"}
 
 
-# TODO 10p programmet skall ge en hjälpsam utskrift istället för en krasch om användaren skriver in fel input
-# TODO 15p om användaren inte anger ett område som exempelvis fysik eller kemi så skall den parametern inte skickas med till apiet och vi får då alla priser det året
-
 def print_help():
     print("Ange ett år och fält eller 'q' för att avsluta")
     print(f"Fält att välja på: {', '.join(FIELD_CATEGORIES.keys())}")
@@ -35,7 +32,6 @@ def handle_user_input(user_input):
         print("Felaktigt antal ord")
 
     res = api.get_nobel_prize(int(year), FIELD_CATEGORIES.get(field, None))
-    # TODO 5p  Lägg till någon typ av avskiljare mellan pristagare, exempelvis --------------------------
 
     # TODO 20p Skriv ut hur mycket pengar varje pristagare fick, tänk på att en del priser delas mellan flera mottagare, skriv ut både i dåtidens pengar och dagens värde
     #   Skriv ut med tre decimalers precision. exempel 534515.123
@@ -50,9 +46,11 @@ def handle_user_input(user_input):
             f"{award['categoryFullName']['se']} prissumma {prize_amount} SEK")
 
         for laureate in award["laureates"]:
+            print("-"*80)
             print(laureate['knownName']['en'])
             print(laureate['motivation']['en'])
             portion = laureate['portion']
+        print("-"*80)
 
 
 def main():
