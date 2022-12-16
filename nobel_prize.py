@@ -14,9 +14,10 @@ def print_help():
     print("Exempel: 1965 fysik")
 
 
-def handle_input_search(user_input):
+def handle_input_search(user_input: str):
     input_words = user_input.split()
 
+    # Get year and field
     if len(input_words) == 2:
         year = input_words[0]
         field = input_words[1]
@@ -26,14 +27,15 @@ def handle_input_search(user_input):
     else:
         print("Felaktigt antal ord")
 
+    # Check if year is an int
     try:
         year = int(year)
     except ValueError:
         print("Felaktigt år")
         return
 
+    # Get data from API and print it
     res = api.get_nobel_prize(year, FIELD_CATEGORIES.get(field, None))
-
     for award in res["nobelPrizes"]:
         api.print_award(award)
 

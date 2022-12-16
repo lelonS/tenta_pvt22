@@ -19,7 +19,7 @@ def calculate_prize_amount(prize_amount: int, portion_str: str) -> float:
 
 
 def print_laureate(laureate: dict, prize_amount: int, prize_adjusted: int):
-    print(laureate['knownName']['en'])
+    print(laureate.get("knownName", {}).get("en", "Unknown name"))  # Some laureates don't have a known name
     print(laureate['motivation']['en'])
     portion = laureate['portion']
     prize_money = calculate_prize_amount(prize_amount, portion)
