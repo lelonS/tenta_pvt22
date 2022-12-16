@@ -1,0 +1,4 @@
+
+*.pyc
+.vscode/settings.json
+.idea/tenta_pvt22.iml
