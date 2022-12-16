@@ -4,12 +4,8 @@ import requests
 # vi använder oss enbart av /nobelPrizes
 # Dokumentation, hjälp samt verktyg för att testa apiet fins här: https://app.swaggerhub.com/apis/NobelMedia/NobelMasterData/2.1
 
-HELP_STRING = """
-Ange ett år och fält
-Exempelvis 1965 fysik
-"""
 
-field_categories = {"fysik": "phy",
+FIELD_CATEGORIES = {"fysik": "phy",
                     "kemi": "che",
                     "litteratur": "lit",
                     "ekonomi": "eco",
@@ -20,13 +16,15 @@ field_categories = {"fysik": "phy",
 # TODO 10p programmet skall ge en hjälpsam utskrift istället för en krasch om användaren skriver in fel input
 # TODO 15p om användaren inte anger ett område som exempelvis fysik eller kemi så skall den parametern inte skickas med till apiet och vi får då alla priser det året
 
+def print_help():
+    print("Ange ett år och fält")
+    print(f"Fält att välja på: {', '.join(FIELD_CATEGORIES.keys())}")
+    print("Exempel: 1965 fysik")
+
 
 def main():
-
+    print_help()
     while True:
-        print(HELP_STRING)
-        # TODO 5p Skriv bara ut hjälptexten en gång när programmet startar inte efter varje gång användaren matat in en fråga
-        #      Förbättra hjälputskriften så att användaren vet vilka fält, exempelvis kemi som finns att välja på
 
         # TODO 5p Gör så att det finns ett sätt att avsluta programmet, om användaren skriver Q så skall programmet stängas av
         #      Beskriv i hjälptexten hur man avslutar programmet
@@ -35,7 +33,7 @@ def main():
         year, field_swe = user_input.split()
 
         parameters = {"nobelPrizeYear": int(
-            year), "nobelPrizeCategory": field_categories[field_swe]}
+            year), "nobelPrizeCategory": FIELD_CATEGORIES[field_swe]}
 
         res = requests.get(
             "http://api.nobelprize.org/2.1/nobelPrizes", params=parameters).json()
