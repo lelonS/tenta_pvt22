@@ -1,8 +1,5 @@
 import api
 
-
-
-
 def print_help():
     """Prints help text on how to use the program
     """
