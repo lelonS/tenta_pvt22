@@ -20,7 +20,7 @@ def get_nobel_prize(year: int, field: str | None = None) -> dict:
     Returns:
         dict: Dictionary with data from API
     """
-    if field is None:
+    if field is None or field not in FIELD_CATEGORIES.values():
         parameters = {"nobelPrizeYear": year}
     else:
         parameters = {"nobelPrizeYear": year, "nobelPrizeCategory": field}
