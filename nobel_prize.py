@@ -5,7 +5,7 @@ def print_error(message: str):
     """Prints an error message
 
     Args:
-        error (str): The error message
+        message (str): The error message
     """
     print(f"{message} Ange 'h' för hjälp")
 
