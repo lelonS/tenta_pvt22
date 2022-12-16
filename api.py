@@ -1,5 +1,7 @@
 import requests
 
+API_URL = "http://api.nobelprize.org/2.1/nobelPrizes"
+
 
 def get_nobel_prize(year: int, field: str | None = None) -> dict:
     """Get nobel prize data from API
@@ -15,7 +17,7 @@ def get_nobel_prize(year: int, field: str | None = None) -> dict:
         parameters = {"nobelPrizeYear": year}
     else:
         parameters = {"nobelPrizeYear": year, "nobelPrizeCategory": field}
-    res = requests.get("http://api.nobelprize.org/2.1/nobelPrizes", params=parameters).json()
+    res = requests.get(API_URL, params=parameters).json()
     return res
 
 
@@ -50,6 +52,8 @@ def print_laureate(laureate: dict, prize_amount: int, prize_adjusted: int):
     else:
         print("Unknown name")
     print(laureate['motivation']['en'])
+
+    # Print prize money
     portion = laureate['portion']
     prize_money = calculate_prize_amount(prize_amount, portion)
     prize_money_adjusted = calculate_prize_amount(prize_adjusted, portion)
@@ -64,8 +68,7 @@ def print_award(award: dict):
     """
     prize_amount = award["prizeAmount"]
     prize_adjusted = award["prizeAmountAdjusted"]
-    print(
-        f"{award['categoryFullName']['se']} prissumma {prize_amount} SEK")
+    print(f"{award['categoryFullName']['se']} prissumma {prize_amount} SEK")
 
     for laureate in award["laureates"]:
         print("-"*80)
