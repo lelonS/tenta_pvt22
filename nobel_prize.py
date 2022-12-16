@@ -33,12 +33,6 @@ def handle_user_input(user_input):
 
     res = api.get_nobel_prize(int(year), FIELD_CATEGORIES.get(field, None))
 
-    # TODO 20p Skriv ut hur mycket pengar varje pristagare fick, tänk på att en del priser delas mellan flera mottagare, skriv ut både i dåtidens pengar och dagens värde
-    #   Skriv ut med tre decimalers precision. exempel 534515.123
-    #   Skapa en funktion som hanterar uträkningen av prispengar och skapa minst ett enhetestest för den funktionen
-    #   Tips, titta på variabeln andel
-    # Feynman fick exempelvis 1/3 av priset i fysik 1965, vilket borde gett ungefär 282000/3 kronor i dåtidens penningvärde
-
     for award in res["nobelPrizes"]:
         api.print_award(award)
 
