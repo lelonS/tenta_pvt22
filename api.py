@@ -2,6 +2,15 @@ import requests
 
 
 def get_nobel_prize(year: int, field: str | None = None) -> dict:
+    """Get nobel prize data from API
+
+    Args:
+        year (int): The year. If below 1901 1901 is used by the api.
+        field (str | None, optional): The field. If None only year is used. Defaults to None.
+
+    Returns:
+        dict: Dictionary with data from API
+    """
     if field is None:
         parameters = {"nobelPrizeYear": year}
     else:
@@ -11,6 +20,15 @@ def get_nobel_prize(year: int, field: str | None = None) -> dict:
 
 
 def calculate_prize_amount(prize_amount: int, portion_str: str) -> float:
+    """Calculate prize amount based on portion
+
+    Args:
+        prize_amount (int): The total prize amount
+        portion_str (str): The portion string. ex: "1/2"
+
+    Returns:
+        float: The prize amount for that portion
+    """
     portion = portion_str.split("/")
     if len(portion) == 1:
         return float(prize_amount)
@@ -19,6 +37,13 @@ def calculate_prize_amount(prize_amount: int, portion_str: str) -> float:
 
 
 def print_laureate(laureate: dict, prize_amount: int, prize_adjusted: int):
+    """Print laureate data
+
+    Args:
+        laureate (dict): Laureate data
+        prize_amount (int): Prize amount
+        prize_adjusted (int): Prize amount adjusted for inflation
+    """
     # Check if laureate has a known name
     if "knownName" in laureate:
         print(laureate["knownName"]["en"])
@@ -32,6 +57,11 @@ def print_laureate(laureate: dict, prize_amount: int, prize_adjusted: int):
 
 
 def print_award(award: dict):
+    """Print award data
+
+    Args:
+        award (dict): Award data
+    """
     prize_amount = award["prizeAmount"]
     prize_adjusted = award["prizeAmountAdjusted"]
     print(

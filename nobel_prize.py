@@ -9,12 +9,20 @@ FIELD_CATEGORIES = {"fysik": "phy",
 
 
 def print_help():
+    """Prints help text on how to use the program
+    """
     print("Ange ett år och fält eller 'q' för att avsluta")
     print(f"Fält att välja på: {', '.join(FIELD_CATEGORIES.keys())}")
     print("Exempel: 1965 fysik")
 
 
 def handle_input_search(user_input: str):
+    """Handles user input for searching for a Nobel prize
+    and prints the result
+
+    Args:
+        user_input (str): The user input
+    """
     input_words = user_input.split()
 
     # Get year and field
