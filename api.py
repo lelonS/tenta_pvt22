@@ -66,6 +66,7 @@ def print_award(award: dict):
     Args:
         award (dict): Award data
     """
+    print("="*80)
     prize_amount = award["prizeAmount"]
     prize_adjusted = award["prizeAmountAdjusted"]
     print(f"{award['categoryFullName']['se']} prissumma {prize_amount} SEK")

@@ -28,7 +28,10 @@ def handle_input_search(user_input: str):
     # Get year and field
     if len(input_words) == 2:
         year = input_words[0]
-        field = input_words[1]
+        field = input_words[1].lower()
+        if field not in FIELD_CATEGORIES:
+            print("Felaktigt område")
+            return
     elif len(input_words) == 1:
         year = input_words[0]
         field = ""
