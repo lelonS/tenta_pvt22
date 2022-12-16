@@ -1,9 +1,4 @@
-import requests
 import api
-# Tips: använd sidan nedan för att se vilken data vi får tillbaks och hur apiet fungerar
-# vi använder oss enbart av /nobelPrizes
-# Dokumentation, hjälp samt verktyg för att testa apiet fins här: https://app.swaggerhub.com/apis/NobelMedia/NobelMasterData/2.1
-
 
 FIELD_CATEGORIES = {"fysik": "phy",
                     "kemi": "che",
@@ -19,7 +14,7 @@ def print_help():
     print("Exempel: 1965 fysik")
 
 
-def handle_user_input(user_input):
+def handle_input_search(user_input):
     input_words = user_input.split()
 
     if len(input_words) == 2:
@@ -31,7 +26,13 @@ def handle_user_input(user_input):
     else:
         print("Felaktigt antal ord")
 
-    res = api.get_nobel_prize(int(year), FIELD_CATEGORIES.get(field, None))
+    try:
+        year = int(year)
+    except ValueError:
+        print("Felaktigt år")
+        return
+
+    res = api.get_nobel_prize(year, FIELD_CATEGORIES.get(field, None))
 
     for award in res["nobelPrizes"]:
         api.print_award(award)
@@ -48,7 +49,7 @@ def main():
         elif user_input.lower() == "h":
             print_help()
         else:
-            handle_user_input(user_input)
+            handle_input_search(user_input)
 
 
 if __name__ == '__main__':
