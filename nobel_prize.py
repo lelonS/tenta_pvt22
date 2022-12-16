@@ -34,6 +34,7 @@ def handle_input_search(user_input: str):
         field = ""
     else:
         print("Felaktigt antal ord")
+        return
 
     # Check if year is an int
     try:
