@@ -40,17 +40,7 @@ def handle_user_input(user_input):
     # Feynman fick exempelvis 1/3 av priset i fysik 1965, vilket borde gett ungefär 282000/3 kronor i dåtidens penningvärde
 
     for award in res["nobelPrizes"]:
-        prize_amount = award["prizeAmount"]
-        prize_adjusted = award["prizeAmountAdjusted"]
-        print(
-            f"{award['categoryFullName']['se']} prissumma {prize_amount} SEK")
-
-        for laureate in award["laureates"]:
-            print("-"*80)
-            print(laureate['knownName']['en'])
-            print(laureate['motivation']['en'])
-            portion = laureate['portion']
-        print("-"*80)
+        api.print_award(award)
 
 
 def main():
