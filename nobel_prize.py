@@ -5,9 +5,10 @@ def print_help():
     """Prints help text on how to use the program
     """
     print("(Ange 'q' för att avsluta och 'h' för hjälp)")
-    print("Ange ett år och fält")
+    print("Ange ett år och fält för att få priset för det fältet för det året")
+    print("Ange endast år för att få alla priser för det året")
     print(f"Fält att välja på: {', '.join(api.FIELD_CATEGORIES.keys())}")
-    print("Exempel: 1965 fysik")
+    print("Exempel: '1965 fysik' eller '1965'")
 
 
 def print_search(year: int, field: str):
@@ -36,7 +37,7 @@ def handle_input_search(user_input: str):
         year = input_words[0]
         field = input_words[1].lower()
         if field not in api.FIELD_CATEGORIES:
-            print("Området kunde inte hittas")
+            print(f"Fältet '{field}' kunde inte hittas")
             return
     elif len(input_words) == 1:
         year = input_words[0]
@@ -49,7 +50,7 @@ def handle_input_search(user_input: str):
     try:
         year = int(year)
     except ValueError:
-        print("Felaktigt år")
+        print("Felaktigt år (måste vara ett heltal)")
         return
 
     # Get data from API and print it
