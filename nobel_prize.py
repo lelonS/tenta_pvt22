@@ -37,20 +37,20 @@ def handle_input_search(user_input: str):
         year = input_words[0]
         field = input_words[1].lower()
         if field not in api.FIELD_CATEGORIES:
-            print(f"Fältet '{field}' kunde inte hittas")
+            print(f"Fältet '{field}' kunde inte hittas. Ange 'h' för hjälp")
             return
     elif len(input_words) == 1:
         year = input_words[0]
         field = ""
     else:
-        print("Felaktigt antal ord")
+        print("Felaktigt antal ord. Ange 'h' för hjälp")
         return
 
     # Check if year is an int
     try:
         year = int(year)
     except ValueError:
-        print("Felaktigt år (måste vara ett heltal)")
+        print("Felaktigt år (måste vara ett heltal). Ange 'h' för hjälp")
         return
 
     # Get data from API and print it
