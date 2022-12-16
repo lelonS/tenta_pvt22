@@ -53,10 +53,10 @@ def main():
             print(
                 f"{award['categoryFullName']['se']} prissumma {prize_amount} SEK")
 
-            for m in award["laureates"]:
-                print(m['knownName']['en'])
-                print(m['motivation']['en'])
-                portion = m['portion']
+            for laureate in award["laureates"]:
+                print(laureate['knownName']['en'])
+                print(laureate['motivation']['en'])
+                portion = laureate['portion']
 
 
 if __name__ == '__main__':
