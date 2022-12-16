@@ -1,5 +1,6 @@
 import api
 
+
 def print_help():
     """Prints help text on how to use the program
     """
@@ -7,7 +8,6 @@ def print_help():
     print("Ange ett år och fält")
     print(f"Fält att välja på: {', '.join(api.FIELD_CATEGORIES.keys())}")
     print("Exempel: 1965 fysik")
-
 
 
 def handle_input_search(user_input: str):
