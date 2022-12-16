@@ -58,6 +58,7 @@ def print_laureate(laureate: dict, prize_amount: int, prize_adjusted: int):
         print(laureate["knownName"]["en"])
     else:
         print("Unknown name")
+
     print(laureate['motivation']['en'])
 
     # Print prize money
@@ -75,7 +76,7 @@ def print_award(award: dict):
     """
     prize_amount = award["prizeAmount"]
     prize_adjusted = award["prizeAmountAdjusted"]
-    print(f"{award['categoryFullName']['se']} prissumma {prize_amount} SEK")
+    print(f"{award['categoryFullName']['se']} prissumma {prize_amount} SEK ({prize_adjusted} SEK i dagens pengar)")
 
     if "laureates" not in award:
         # Some awards don't have laureates (ex. 1916 chemistry)
