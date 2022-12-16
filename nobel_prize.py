@@ -27,6 +27,11 @@ def print_search(year: int, field: str):
         print_error(f"Minsta året som stödjs är {api.MIN_YEAR}.")
         return
 
+    # Check if field is valid ("" is valid as no field)
+    if field != "" and field not in api.FIELD_CATEGORIES:
+        print_error(f"Fältet '{field}' kunde inte hittas.")
+        return
+
     res = api.get_nobel_prize(year, api.FIELD_CATEGORIES.get(field, None))
     for award in res["nobelPrizes"]:
         api.print_award(award)
@@ -45,9 +50,6 @@ def handle_input_search(user_input: str):
     if len(input_words) == 2:
         year = input_words[0]
         field = input_words[1].lower()
-        if field not in api.FIELD_CATEGORIES:
-            print_error(f"Fältet '{field}' kunde inte hittas.")
-            return
     elif len(input_words) == 1:
         year = input_words[0]
         field = ""
