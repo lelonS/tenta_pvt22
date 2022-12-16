@@ -2,11 +2,6 @@ import api
 
 
 def print_error(message: str):
-    """Prints an error message
-
-    Args:
-        message (str): The error message
-    """
     print(f"{message} Ange 'h' för hjälp")
 
 
