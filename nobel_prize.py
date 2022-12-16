@@ -11,7 +11,7 @@ def print_help():
     print("(Ange 'q' för att avsluta och 'h' för hjälp)")
     print("Ange ett år och fält för att få priset för det fältet för det året")
     print("Ange endast år för att få alla priser för det året")
-    print(f"Minsta året som stödjs är {api.MIN_YEAR}")
+    print(f"Minsta året som kan anges är {api.MIN_YEAR}")
     print(f"Fält att välja på: {', '.join(api.FIELD_CATEGORIES.keys())}")
     print("Exempel: '1965 fysik' eller '1965'")
 
@@ -24,7 +24,7 @@ def print_search(year: int, field: str):
         field (str): The field (long name)
     """
     if year < api.MIN_YEAR:
-        print_error(f"Minsta året som stödjs är {api.MIN_YEAR}.")
+        print_error(f"Minsta året som kan anges är {api.MIN_YEAR}.")
         return
 
     # Check if field is valid ("" is valid as no field)
