@@ -15,12 +15,13 @@ def get_nobel_prize(year: int, field: str | None = None) -> dict:
     """Get nobel prize data from API
 
     Args:
-        year (int): The year. If below 1901 1901 is used by the api.
+        year (int): The year. If below MIN_YEAR then MIN_YEAR is used by the api.
         field (str | None, optional): The field. If None only year is used. Defaults to None.
 
     Returns:
         dict: Dictionary with data from API
     """
+    year = max(year, MIN_YEAR)
     if field is None or field not in FIELD_CATEGORIES.values():
         parameters = {"nobelPrizeYear": year}
     else:
@@ -51,8 +52,8 @@ def print_laureate(laureate: dict, prize_amount: int, prize_adjusted: int):
 
     Args:
         laureate (dict): Laureate data
-        prize_amount (int): Prize amount
-        prize_adjusted (int): Prize amount adjusted for inflation
+        prize_amount (int): Total prize amount
+        prize_adjusted (int): Total prize amount adjusted for inflation
     """
     # Check if laureate has a known name
     if "knownName" in laureate:
