@@ -78,7 +78,7 @@ def print_award(award: dict):
     print(f"{award['categoryFullName']['se']} prissumma {prize_amount} SEK")
 
     if "laureates" not in award:
-        # Some awards don't have laureates (1916 chemistry)
+        # Some awards don't have laureates (ex. 1916 chemistry)
         print("(No laureates)")
     else:
         for laureate in award["laureates"]:
